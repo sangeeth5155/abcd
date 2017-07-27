@@ -1,0 +1,12 @@
+<project name="deploy code" basedir="." xmlns:sf="antlib:com.salesforce">
+<property file="build.properties"/>
+<property environment="env"/>
+<target name="Deploy">
+<sf:deploy
+username="${Sandbox2.username}"
+password="${Sandbox2.password}"
+serverurl="${sf.serverurl}"
+deployRoot="C:\Program Files (x86)\Jenkins\workspace\demo(1)\UserDetails app\src"
+runAllTests="true" />
+</target>
+</project>
