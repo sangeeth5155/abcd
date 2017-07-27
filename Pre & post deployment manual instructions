@@ -1,0 +1,68 @@
+******************************************************************************************************************************************************
+Salesforce Demo for DevOps Flow, PRE & POST DEPLOYMENT STEPS
+
+******************************************************************************************************************************************************
+Notes:This document publishes the steps to be followed before and after deployment to Sandbox.The Document is divided into 4 set of Instructions. 
+
+I).Pre Deployment - One Time Instructions
+II).Pre Deployment - Repetitive Instructions
+III).Post Deployment - One Time Instructions
+IV).Post Deployment - Repetitive Instructions
+
+******************************************************************************************************************************************************
+
+Pre Deployment - One Time Instructions
+******************************************************************************************************************************************************
+1)Inorder to delete the custom object named Sample, 
+
+	a)Have to remove the reference b/w the related ApexClasses and custom object,if the Apex class members are required for the project.
+	That is,Remove the reference b/w the Apex classes and the custom object named Sample.
+							
+							(OR)
+
+	b)Have to delete the related ApexClass members,if the Apex class members not required for the project.
+	That is,Go to destructiveChangesPre.xml file,add the following ApexClass component members in the xml and check-in
+		1) Sample1
+		2) Sample2
+		3) Sample3
+							(AND)
+
+	c)Go to destructiveChangesPost.xml file,add the Sample__c custom object member in the xml and check-in
+
+******************************************************************************************************************************************************
+
+Pre-Deployment - Repetitive Instruction
+******************************************************************************************************************************************************
+//Process Builder
+1)Userdetails_PB-version 1(Field Update)
+  Userdetais_PB-version 2(Field Update and Record creation)
+  Before retrieve, Deactivate the process Builder
+  Go to setup->process Builder ->Deactivate it
+
+*******************************************************************************************************************************************************
+
+Post-Deployment - One Time Instructions
+*******************************************************************************************************************************************************
+//If the record owner is in admin profile,Trigger an Email to a register person.
+1)Setup-->Develop-->Custom Settings-->SELECT "Trigger Email"-->Click 'Manage' button  
+                                  --> Click 'New' -->Choose the location as profile -->SELECT "System Administrator"
+                                  --> check the Email checkbox --> Save it
+2)Setup-->Workflow Rules-->Check the Condition If an Email checkbox is Enable,it will trigger a mail-->In that action choose an Email alert for the field 
+                         of the UserDetails object
+3)Go to destructiveChangesPre.xml file and comment the following ApexClass members.
+	a)Sample1
+	b)Sample2
+	c)Sample3
+4)Go to destructiveChangesPost.xml file and comment the Custom object member named Sample__c.
+
+********************************************************************************************************************************************************  
+
+Post-Deployment - Repetitive Instruction
+********************************************************************************************************************************************************
+1)After Deploy,In that org
+ Go to setup->process Builder ->Active 
+ 
+2)If we want to ReDeploy, Userdetails_PB-version 1(Field Update)
+   Deactivate the existing Userdetails_PB-version 1(Field Update)
+
+*********************************************************************************************************************************************************
